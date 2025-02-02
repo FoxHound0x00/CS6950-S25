@@ -20,6 +20,8 @@ class PersistenceHomology:
         self.labels = labels
         self.y_true = y_true
         self.id2label = id2label
+        self.dgms_full = []
+        self.dgms_sub = []
     
     def pca_transform(self, data, n_components=2):
         from sklearn.decomposition import PCA
@@ -49,6 +51,9 @@ class PersistenceHomology:
             dgms_full = res_full['dgms']
             dgms_sub = res_sub['dgms']
             idx_perm = res_sub['idx_perm']
+            self.dgms_full.append(dgms_full)
+            self.dgms_sub.append(dgms_sub)
+
 
             # class_names = [id2label[label] for label in labels]
             print(len(idx_perm))
@@ -92,4 +97,4 @@ class PersistenceHomology:
 
 
         
-        return ripser(data, distance_matrix=True, maxdim=dim)['dgms']
+        return self.dgms_full, self.dgms_sub

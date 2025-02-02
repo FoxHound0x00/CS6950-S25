@@ -80,10 +80,19 @@ print(pcs_.shape)
 # performing persistence homology
 from ph import PersistenceHomology
 ph = PersistenceHomology(y_true, y_pred, id2label)
-ph.ripser_persistence(pcs_) ## without PCA
-ph.ripser_persistence(pcs_=pcs_, dim=2, PCA=True) ## with PCA
+dgms_full, dgms_sub = ph.ripser_persistence(pcs_) ## without PCA
+dgms_full_pca, dgms_sub_pca = ph.ripser_persistence(pcs_=pcs_, dim=2, PCA=True) ## with PCA
 
 
-# ph.plot_persistence_diagrams()
-# ph.plot_persistence_heatmaps()
-# ph.plot_bottleneck_matching()
+# checking the bottleneck distance
+from utils import compute_dist
+for i in range(len(pcs_)):
+  for j in range(i+1, len(pcs_)):
+        print(f"(full-rank) Bottleneck distance between  {id2label[y_true[i]]} and {id2label[y_true[j]]}: {compute_dist(pcs_[i], pcs_[j], y_true, [i,j], id2label, dgms_full[i], dgms_full[j])}")
+        print(f"(PCA) Bottleneck distance between  {id2label[y_true[i]]} and {id2label[y_true[j]]}: {compute_dist(pcs_[i], pcs_[j], y_true, [i,j], id2label, dgms_full_pca[i], dgms_full_pca[j])}")
+        print(f"(full-rank - subsampled pts) Bottleneck distance between  {id2label[y_true[i]]} and {id2label[y_true[j]]} : {compute_dist(pcs_[i], pcs_[j], y_true, [i,j], id2label, dgms_sub[i], dgms_sub[j])}")
+        print(f"(PCA - subsampled pts) Bottleneck distance between  {id2label[y_true[i]]} and {id2label[y_true[j]]} : {compute_dist(pcs_[i], pcs_[j], y_true, [i,j], id2label, dgms_sub_pca[i], dgms_sub_pca[j])}")
+        
+# checking for connected components 
+## go thru this, use the mst processor to get the number of connected components
+### https://persim.scikit-tda.org/en/latest/_modules/persim/visuals.html#plot_diagrams
