@@ -1,5 +1,6 @@
-
 import persim 
+
+
 def compute_dist(x_1, x_2, labels, layers, id2label, dgm1, dgm2, dist_type='bottleneck'):
     print("pass PCA transformed values!!!")
     print("pass h0 or h1 diagrams")
