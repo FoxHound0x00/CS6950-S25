@@ -12,8 +12,7 @@ import tadasets
 from persim import plot_diagrams, bottleneck
 from persim import bottleneck_matching
 from ripser import ripser
-
-
+import os
 
 class PersistenceHomology:
     def __init__(self, labels, y_true, id2label):
@@ -38,6 +37,7 @@ class PersistenceHomology:
             tic = time.time()
             res_full = ripser(pc)  
             toc = time.time()
+            print(f"PCA : {PCA}")
             print(f"Elapsed Time Original Point Cloud: {toc - tic:.3g} seconds")
             print(f"Number of connected components (full-rank) (layer-{i}) : {len(res_full['dgms'][0])}")
 
@@ -93,6 +93,7 @@ class PersistenceHomology:
             plt.title("Subsampled Point Cloud Persistence Diagram")
             
             # plt.show()
+            os.makedirs("PH", exist_ok=True)
             plt.savefig(f"PH/Layer_{i}.png")
 
 

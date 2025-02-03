@@ -1,7 +1,10 @@
 import persim 
-
+import matplotlib.pyplot as plt
+from persim import plot_diagrams, bottleneck
+import os
 
 def compute_dist(x_1, x_2, labels, layers, id2label, dgm1, dgm2, dist_type='bottleneck'):
+
     print("pass PCA transformed values!!!")
     print("pass h0 or h1 diagrams")
     plt.figure(figsize=(12, 12))
@@ -32,7 +35,7 @@ def compute_dist(x_1, x_2, labels, layers, id2label, dgm1, dgm2, dist_type='bott
     plt.subplot(224)
     plot_diagrams(dgm2)
     plt.title("Point Cloud 2 Persistence Diagram")
-    
+    os.makedirs("bottleneck_dist", exist_ok=True)
     plt.savefig(f"bottleneck_dist/Layers_{layers[0]}_{layers[1]}_persistence_comparison.png")
     
     
@@ -40,10 +43,12 @@ def compute_dist(x_1, x_2, labels, layers, id2label, dgm1, dgm2, dist_type='bott
     
     plt.figure(figsize=(12, 6))
     plt.subplot(221)
-    persim.plot_diagrams([dgm1, dgm2], labels=['Clean $H_0$', 'Noisy $H_0$'], show=False)
-    bn_dist, matching = persim.bottleneck(dgm1, dgm2, matching=True)
+    
+    persim.plot_diagrams([dgm1[0], dgm2[0]], labels=['Clean $H_0$', 'Noisy $H_0$'], show=False)
+    bn_dist, matching = persim.bottleneck(dgm1[0], dgm2[0], matching=True)
     
     plt.subplot(222)
-    persim.bottleneck_matching(dgm1=dgm1, dgm2=dgm2, matching=matching, labels=['Clean $H_1$', 'Noisy $H_1$'])
+    persim.bottleneck_matching(dgm1=dgm1[0], dgm2=dgm2[0], matching=matching, labels=['Clean $H_1$', 'Noisy $H_1$'])
     plt.savefig(f"bottleneck_dist/Layers_{layers[0]}_{layers[1]}_distance_comparison.png")
     
+    return bn_dist

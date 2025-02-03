@@ -1,3 +1,6 @@
 logs/
-test-cifar-10
-vit_cifar10_finetuned 
+test-cifar-10/
+vit_cifar10_finetuned/
+__pycache__
+PH/
+bottleneck_dist
