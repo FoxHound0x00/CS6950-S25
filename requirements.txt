@@ -143,7 +143,7 @@ regex==2024.11.6
 renumics-spotlight==1.6.13
 requests==2.32.3
 rfc3986==1.5.0
-ripser==0.6.11
+ripser==0.6.10
 rpds-py==0.22.3
 rsa==4.9
 safetensors==0.5.2
