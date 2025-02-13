@@ -5,6 +5,9 @@ from transformers import ViTImageProcessor # for tokenizing images
 from hookfn import Probe
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import numpy as np
+from mst import MSTProcessor
+from graph_test import vr_relative_neighborhood_graph
+import networkx as nx
 
 
 # for gpu
@@ -96,3 +99,20 @@ for i in range(len(pcs_)):
 # checking for connected components 
 ## go thru this, use the mst processor to get the number of connected components
 ### https://persim.scikit-tda.org/en/latest/_modules/persim/visuals.html#plot_diagrams
+
+mst_obj = MSTProcessor(threshold=25)
+for i in range(len(pcs_)):
+  n_components, labels, filtered_mst = mst_obj(pcs[i])
+  print(n_components)
+  cts = mst_obj.plot_stacked_cluster_chart(labels, y_true, i)
+  print(cts)
+
+
+## density based distances 
+## Number of neighbors
+n_k = 3
+g, dist, idx = vr_relative_neighborhood_graph(pcs[11], k=n_k, epsilon=0.8)
+temp_ = np.zeros((len(pcs[11]), len(pcs[11]) - n_k - 1))
+dist_matrix = np.concatenate((dist, temp_), axis=1)
+print(dist_matrix.shape)
+print(f"Number of connected components: {nx.number_connected_components(g)}")
