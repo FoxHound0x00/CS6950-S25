@@ -1,0 +1,5 @@
+{
+    "Model": ["ResNet-18", "ViT", "MobileNetV2", "CLIP"],
+    "Layer": ["layer4.2.relu", "layer4.1.relu", "layer4.0.relu", "layer3.5.relu"],
+    "Distance Metric": ["Euclidean", "Mahalanobis", "Cosine", "Manhattan", "Jaccard", "L1", "L2", "Dot Product", "Spearman", "Kendall", "Pearson"]
+}
