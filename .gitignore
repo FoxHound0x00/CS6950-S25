@@ -4,3 +4,27 @@ vit_cifar10_finetuned/
 __pycache__
 PH/
 bottleneck_dist
+
+dash-ph/services/frontend/.DS_Store
+dash-ph/services/frontend/node_modules
+dash-ph/services/frontend/dist
+
+
+# local env files
+dash-ph/services/frontend/.env.local
+dash-ph/services/frontend/.env.*.local
+
+# Log files
+dash-ph/services/frontend/npm-debug.log*
+dash-ph/services/frontend/yarn-debug.log*
+dash-ph/services/frontend/yarn-error.log*
+dash-ph/services/frontend/pnpm-debug.log*
+
+# Editor directories and files
+dash-ph/services/frontend/.idea
+dash-ph/services/frontend/.vscode
+dash-ph/services/frontend/*.suo
+dash-ph/services/frontend/*.ntvs*
+dash-ph/services/frontend/*.njsproj
+dash-ph/services/frontend/*.sln
+dash-ph/services/frontend/*.sw?
