@@ -22,7 +22,8 @@ class ActViz:
         cbar.set_ticks(range(len(id2label)))
         cbar.set_ticklabels([id2label[i] for i in range(len(id2label))])
         plt.title(f"{method} Visualization")
-        plt.show()
+        plt.savefig(f'{method.lower()}_visualization.png')
+        # plt.show()
 
 
 
